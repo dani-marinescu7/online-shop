@@ -3,7 +3,7 @@ package org.dani.onlineshop.service;
 import org.dani.onlineshop.enums.Roles;
 import org.dani.onlineshop.exceptions.UserNotFoundException;
 import org.dani.onlineshop.model.User;
-import org.dani.onlineshop.repository.UsersRepository;
+import org.dani.onlineshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,32 +13,32 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void addUser(User user) {
         user.setRole(Roles.USER);
-        usersRepository.save(user);
+        userRepository.save(user);
     }
 
    public void deleteUserById(Long id) {
-        usersRepository.deleteById(id);
+        userRepository.deleteById(id);
    }
 
     public List<User> getAllUsers() {
-        return usersRepository.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long id) {
-        return usersRepository.findById(id);
+        return userRepository.findById(id);
     }
 
     public User updateUserById(Long userId, User updatedUser) {
-        User user = usersRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
 
         user.setName(updatedUser.getName());
@@ -51,6 +51,6 @@ public class UserService {
         user.setImagePath(updatedUser.getImagePath());
         user.setRole(updatedUser.getRole());
 
-        return usersRepository.save(user);
+        return userRepository.save(user);
     }
 }
