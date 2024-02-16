@@ -12,14 +12,17 @@ const AddItem = () => {
     const navigate = useNavigate();
 
     const handleFormSubmit = async (values) => {
+        console.log(values)
         try {
             const response = await fetch('http://localhost:8080/items', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer pYIvPjGHi6kiLcGKOpDswpJLH+B5wHR1Hm3gjUFNSzI=', // Adjusted to a more common format
                 },
                 body: JSON.stringify(values),
             });
+            const responseData = await response.json(); // Parse JSON response
 
             if (response.ok) {
                 console.log('Form data submitted successfully.');
