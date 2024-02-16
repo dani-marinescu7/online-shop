@@ -22,7 +22,6 @@ const AddItem = () => {
                 },
                 body: JSON.stringify(values),
             });
-            const responseData = await response.json(); // Parse JSON response
 
             if (response.ok) {
                 console.log('Form data submitted successfully.');
