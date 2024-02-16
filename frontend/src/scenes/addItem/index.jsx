@@ -18,7 +18,6 @@ const AddItem = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer pYIvPjGHi6kiLcGKOpDswpJLH+B5wHR1Hm3gjUFNSzI=', // Adjusted to a more common format
                 },
                 body: JSON.stringify(values),
             });
