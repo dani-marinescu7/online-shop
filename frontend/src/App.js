@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import { Provider } from 'react-redux';
+import store from './state/store';
 import {Routes, Route} from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
@@ -18,37 +20,39 @@ function App() {
     const [isSidebar, setIsSidebar] = useState(true);
 
     return (
-        <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <div className="app">
-                    <Routes>
-                        <Route path="/" element={<ItemList/>}/>
-                        <Route path="/admin/login" element={<LoginPage/>}/>
-                        <Route
-                            path="/admin/*"
-                            element={
-                                <>
-                                    <Sidebar isSidebar={isSidebar}/>
-                                    <main className="content">
-                                        <Topbar setIsSidebar={setIsSidebar}/>
-                                        <Routes>
-                                            <Route path="/dashboard" element={<Dashboard/>}/>
-                                            <Route path="/users" element={<Users/>}/>
-                                            <Route path="/items" element={<Items/>}/>
-                                            <Route path="/invoices" element={<Invoices/>}/>
-                                            <Route path="/add-user" element={<AddUser/>}/>
-                                            <Route path="/add-item" element={<AddItem/>}/>
-                                            <Route path="/edit-user" element={<AddUser/>}/>
-                                        </Routes>
-                                    </main>
-                                </>
-                            }
-                        />
-                    </Routes>
-                </div>
-            </ThemeProvider>
-        </ColorModeContext.Provider>
+        <Provider store={store}>
+            <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline/>
+                    <div className="app">
+                        <Routes>
+                            <Route path="/" element={<ItemList/>}/>
+                            <Route path="/admin/login" element={<LoginPage/>}/>
+                            <Route
+                                path="/admin/*"
+                                element={
+                                    <>
+                                        <Sidebar isSidebar={isSidebar}/>
+                                        <main className="content">
+                                            <Topbar setIsSidebar={setIsSidebar}/>
+                                            <Routes>
+                                                <Route path="/dashboard" element={<Dashboard/>}/>
+                                                <Route path="/users" element={<Users/>}/>
+                                                <Route path="/items" element={<Items/>}/>
+                                                <Route path="/invoices" element={<Invoices/>}/>
+                                                <Route path="/add-user" element={<AddUser/>}/>
+                                                <Route path="/add-item" element={<AddItem/>}/>
+                                                <Route path="/edit-user" element={<AddUser/>}/>
+                                            </Routes>
+                                        </main>
+                                    </>
+                                }
+                            />
+                        </Routes>
+                    </div>
+                </ThemeProvider>
+            </ColorModeContext.Provider>
+        </Provider>
     );
 }
 
