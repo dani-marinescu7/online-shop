@@ -43,8 +43,6 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery("(min-width:600px)");
-    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-    const theme = useTheme();
     const [forgotPasswordClick, setForgotPasswordClick] = useState(false);
     const [wrongCredentials, setWrongCredentials] = useState(false);
     const [missingEmail, setMissingEmail] = useState(false);
@@ -126,7 +124,14 @@ const LoginPage = () => {
     };
 
     return (
-        <main className="content">
+        <main
+            className="content"
+            style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+            }}
+        >
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -142,7 +147,13 @@ const LoginPage = () => {
                       setFieldValue,
                       resetForm,
                   }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form
+                        onSubmit={handleSubmit}
+                        style={{
+                            width: '30%',
+                            alignItems: 'center'
+                        }}
+                    >
                         <Box
                             display="grid"
                             gap="30px"
@@ -150,7 +161,6 @@ const LoginPage = () => {
                             sx={{
                                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                             }}
-                            width="30%"
                         >
                             {isRegister && (
                                 <>
@@ -162,13 +172,12 @@ const LoginPage = () => {
                                         name="username"
                                         error={Boolean(touched.username) && Boolean(errors.username)}
                                         helperText={touched.username && errors.username}
-                                        sx={{ gridColumn: "span 2" }}
+                                        sx={{ gridColumn: "span 4" }}
                                     />
                                     <Box
                                         gridColumn="span 4"
                                         border={`1px solid ${palette.neutral.medium}`}
                                         borderRadius="5px"
-                                        p="1rem"
                                     >
                                         <Dropzone
                                             acceptedFiles=".jpg,.jpeg,.png"
@@ -224,7 +233,7 @@ const LoginPage = () => {
                         </Box>
 
                         {/* BUTTONS */}
-                        <Box width="30%">
+                        <Box>
                             <Button
                                 fullWidth
                                 type="submit"
