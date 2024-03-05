@@ -20,6 +20,7 @@ const AddUser = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa('pYIvPjGHi6kiLcGKOpDswpJLH+B5wHR1Hm3gjUFNSzI='),
                 },
                 body: JSON.stringify(values),
             });

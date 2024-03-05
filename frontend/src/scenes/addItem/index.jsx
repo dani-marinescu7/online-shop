@@ -12,6 +12,7 @@ const AddItem = () => {
     const navigate = useNavigate();
 
     const handleFormSubmit = async (values) => {
+        console.log(values)
         try {
             const response = await fetch('http://localhost:8080/items', {
                 method: 'POST',

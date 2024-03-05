@@ -30,7 +30,7 @@ public class ItemController {
         itemService.addItem(item);
     }
 
-    @PostMapping("/add-items")
+    @PostMapping("/add-item")
     public void addItems(@RequestBody List<Item> items) {
         itemService.addItems(items);
     }
