@@ -85,7 +85,7 @@ const LoginPage = () => {
                         token: loggedIn.token,
                     })
                 );
-                navigate("/home");
+                navigate("/");
             }
         } catch (error) {
             console.error("Login failed:", error);

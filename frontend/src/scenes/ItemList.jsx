@@ -7,21 +7,27 @@ import Sidebar2 from "../components/Shop/Sidebar2";
 import {Col, Row} from "react-bootstrap";
 import ItemTable from "../components/Shop/ItemTable";
 import Filterbar from "../components/Shop/Filterbar";
-
-
-const fetchItems = () => {
-    return fetch(`http://localhost:8080/items`).then((res) => res.json());
-};
-const deleteItem = (id) => {
-    return fetch(`/items/${id}`, {method: "DELETE"}).then((res) =>
-        res.json()
-    );
-};
+import {setLogin} from "../state";
 
 const ItemList = () => {
     //   const {sortBy, sortOrder} = useParams();
     const [loading, setLoading] = useState(true);
-    const [items, setItems] = useState(null);
+    const [items, setItems] = useState([]);
+
+    const fetchItems = async () => {
+        try {
+            const itemsResponse = await fetch("http://localhost:8080/items", );
+            const items = await itemsResponse.json();
+            setItems(items);
+        } catch (error) {
+            console.error("Failed to fetch items: ", error);
+        }
+    };
+    const deleteItem = (id) => {
+        return fetch(`/items/${id}`, {method: "DELETE"}).then((res) =>
+            res.json()
+        );
+    };
     const handleDelete = (id) => {
         deleteItem(id);
 
@@ -32,9 +38,8 @@ const ItemList = () => {
 
     useEffect(() => {
         fetchItems()
-            .then(item => {
+            .then( () => {
                 setLoading(false);
-                setItems(item);
             })
 
     }, []);
