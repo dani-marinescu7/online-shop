@@ -14,7 +14,8 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const fetchUsers = async () => {
     try {
@@ -37,6 +38,9 @@ const Users = () => {
     const [editedUser, setEditedUser] = useState({});
     const navigate = useNavigate();
     const theme = useTheme();
+    const token = useSelector((state) => state.token);
+    const [user, setUser] = useState(null);
+    const { userId } = useParams();
     const colors = tokens(theme.palette.mode);
     const columns = [
         { field: "id", headerName: "ID" },
@@ -262,6 +266,15 @@ const Users = () => {
         } catch (error) {
             console.error('An error occurred:', error);
         }
+    };
+
+    const getUser = async () => {
+        const response = await fetch(`http://localhost:8080/users/${userId}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        setUser(data);
     };
 
 

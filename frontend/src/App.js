@@ -8,12 +8,12 @@ import Dashboard from "./scenes/dashboard";
 import Users from "./scenes/users";
 import Invoices from "./scenes/invoices";
 import Items from "./scenes/items";
-import AddUser from "./scenes/addUser";
-import AddItem from "./scenes/addItem";
+import AddUser from "./scenes/users/addUser";
+import AddItem from "./scenes/items/addItem";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import ItemList from "./scenes/ItemList";
-import LoginPage from "./scenes/login/login";
+import LoginPage from "./scenes/login";
 
 
 function App() {
