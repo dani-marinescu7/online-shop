@@ -39,7 +39,7 @@ const Users = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const token = useSelector((state) => state.token);
-    const [user, setUser] = useState(null);
+    const user = useSelector((state) => state.auth.user);
     const { userId } = useParams();
     const colors = tokens(theme.palette.mode);
     const columns = [
@@ -243,10 +243,6 @@ const Users = () => {
         })
     }
 
-    const addUser = () => {
-        navigate("/admin/add-user")
-    }
-
     const handleDeleteSubmit = async (id) => {
         try {
             const response = await fetch('http://localhost:8080/users', {
@@ -268,15 +264,6 @@ const Users = () => {
         }
     };
 
-    const getUser = async () => {
-        const response = await fetch(`http://localhost:8080/users/${userId}`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await response.json();
-        setUser(data);
-    };
-
 
     return (
         <Box m="20px">
@@ -292,7 +279,7 @@ const Users = () => {
                             fontWeight: "bold",
                             padding: "10px 20px",
                         }}
-                        onClick={() => addUser()}
+                        onClick={() => navigate("/admin/add-user")}
                     >
                         Add User
                     </Button>
